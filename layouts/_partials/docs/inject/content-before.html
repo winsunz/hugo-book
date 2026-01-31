@@ -1,0 +1,44 @@
+<nav class="my-breadcrumbs" aria-label="breadcrumb">
+  <span><a href="https://pettinggo.com/">官网首页</a></span>
+  <span class="separator">/</span>
+  <span><a href="/wiki/">百科首页</a></span>
+  
+  {{ range $index, $element := .Ancestors.Reverse }}
+    {{ if not .IsHome }}
+      <span class="separator">/</span>
+      <span><a href="{{ .Permalink }}">{{ .Title }}</a></span>
+    {{ end }}
+  {{ end }}
+  
+  <span class="separator">/</span>
+  <span class="current">{{ .Title }}</span>
+</nav>
+
+<style>
+/* 面包屑样式 */
+.my-breadcrumbs {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    font-family: system-ui, sans-serif;
+}
+.my-breadcrumbs a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.my-breadcrumbs a:hover {
+    color: #f4623a; /* 品牌橙 */
+    text-decoration: underline;
+}
+.my-breadcrumbs .separator {
+    margin: 0 8px;
+    color: #ccc;
+}
+.my-breadcrumbs .current {
+    color: #f4623a;
+    font-weight: 600;
+}
+</style>

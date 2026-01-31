@@ -1,14 +1,168 @@
-/*
-  You can add custom styles here.
-  It could be plugins:
-    @import "plugins/numbered";
-    @import "plugins/scrollbars";
-  Or custom styles:
-    body { background: white; }
-  Or even theme mixins:
-    @mixin theme-light {
-      --body-background: white;
-      --body-font-color: black;
-      ...
+/* =========================================
+   PettingGo 品牌视觉移植 (For Hugo-Book)
+   ========================================= */
+
+/* 1. 核心变量覆盖 */
+:root {
+  --color-primary: #f4623a;       /* 核心橙色 */
+  --color-link: #f4623a;          /* 链接颜色 */
+  --color-visited: #c34e2e;       /* 点击过的链接 */
+  
+  --body-background: #fdfbf7;     /* 暖白背景 (bg-warm) */
+  --body-font-color: #555555;     /* 正文灰 */
+  
+  --gray-100: #fcfcfc;            /* 侧边栏背景 */
+  --gray-200: #e9ecef;            /* 分割线 */
+}
+
+/* 2. 侧边栏 (菜单) 样式 */
+.book-menu {
+  background-color: #fff !important;
+  border-right: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 4px 0 24px rgba(0,0,0,0.02);
+  
+  /* 侧边栏链接 */
+  a {
+    color: #666;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--color-primary) !important;
     }
-*/
+  }
+
+  /* 品牌 Logo 区域 */
+  .book-brand {
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #2c2c2c !important;
+    margin-bottom: 1.5rem;
+    
+    /* 让 Logo 看起来像主站的导航栏 */
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* 3. 正文区域样式 */
+.book-page {
+  background-color: var(--body-background);
+}
+
+.markdown {
+  /* 标题颜色 */
+  h1, h2, h3, h4, h5, h6 {
+    color: #2c2c2c;
+    font-weight: 700;
+    margin-top: 2rem;
+  }
+
+  h1 {
+    color: var(--color-primary); /* H1 使用品牌色 */
+    border-bottom: 2px solid rgba(244, 98, 58, 0.2);
+    padding-bottom: 0.5rem;
+  }
+
+  /* 链接样式 */
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* 引用块 (模拟主站的 Expert Advice) */
+  blockquote {
+    background: #fff;
+    border-left: 5px solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.5rem;
+    color: #666;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+    
+    p { margin: 0; }
+  }
+
+  /* 表格样式 */
+  table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    
+    thead tr {
+      background-color: var(--color-primary);
+      color: #fff;
+    }
+    
+    tbody tr:nth-child(even) {
+      background-color: #fff;
+    }
+    tbody tr:nth-child(odd) {
+      background-color: #fafafa;
+    }
+  }
+  
+  /* 图片圆角 */
+  img {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+}
+
+/* 4. 搜索框美化 */
+.book-search {
+  input {
+    border-radius: 50px; /* 胶囊圆角 */
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    
+    &:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(244, 98, 58, 0.1);
+    }
+  }
+}
+
+/* 5. 顶部导航 (移动端/宽屏) */
+.book-header {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 6. 按钮/卡片 (如果有的话) */
+.book-btn {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #c34e2e;
+    transform: translateY(-2px);
+  }
+}
+
+/* 暗黑模式适配 (简单反色，防止夜间模式瞎眼) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-background: #1f1d1b;
+    --gray-100: #2b2826;
+    --body-font-color: #dcd7d1;
+  }
+  .book-menu {
+    background-color: #2b2826 !important;
+    .book-brand { color: #f2efe9 !important; }
+    a { color: #9e9a96; }
+  }
+  .markdown blockquote {
+    background-color: #2b2826;
+    color: #dcd7d1;
+  }
+}

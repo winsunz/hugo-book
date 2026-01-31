@@ -1,0 +1,146 @@
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+<style>
+    /* =========================================
+       PettingGo 4.0 结构分离版 (修复 Footer 位置)
+       ========================================= */
+    
+    :root {
+        --color-primary: #f4623a !important;
+        --color-link: #f4623a !important;
+        --body-background: #f4f4f4 !important;
+        --gray-500: #6c757d !important;
+    }
+
+    body {
+        font-family: "Merriweather", "Georgia", serif !important;
+        color: #4e4e4e !important;
+        background-color: var(--body-background);
+    }
+
+    /* 标题字体 */
+    h1, h2, h3, h4, h5, h6, .book-brand {
+        font-family: system-ui, -apple-system, sans-serif !important;
+    }
+
+    /* -------------------
+       左侧导航栏
+       ------------------- */
+    body .book-menu {
+        background-color: #fff !important;
+        box-shadow: 0 0 20px rgba(0,0,0,0.03);
+        padding-top: 2rem;
+    }
+    body .book-brand {
+        color: #f4623a !important;
+        font-weight: 800 !important;
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    body .book-menu a {
+        color: #6c757d !important;
+        font-size: 0.9rem;
+        padding: 6px 0;
+        font-family: system-ui, sans-serif !important;
+    }
+    body .book-menu a:hover, body .book-menu a.active {
+        color: #f4623a !important;
+        background: transparent !important;
+        transform: translateX(5px);
+    }
+    /* 搜索框 */
+    body .book-search input {
+        border-radius: 50px !important;
+        border: 1px solid #ced4da !important;
+        padding: 10px 20px !important;
+        background: #f8f9fa;
+    }
+    body .book-search input:focus {
+        background: #fff;
+        border-color: #f4623a !important;
+        box-shadow: 0 0 0 0.25rem rgba(244, 98, 58, 0.25) !important;
+    }
+
+    /* -------------------
+       右侧大容器 (透明化)
+       ------------------- */
+    body .book-page {
+        background-color: transparent !important; /* 关键：大容器透明 */
+        margin: 0 !important;
+        padding: 20px !important;
+        box-shadow: none !important;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* 保证占满全屏高度 */
+    }
+
+    /* -------------------
+       文章内容卡片 (独立白卡)
+       ------------------- */
+    .markdown {
+        background-color: #fff !important;
+        padding: 40px !important;
+        border-radius: 1.5rem !important;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
+        margin-bottom: 2rem !important; /* 把 Footer 顶开 */
+        
+        /* 关键：把内容撑开，让 Footer 沉底 */
+        flex-grow: 1; 
+        min-height: 60vh; 
+    }
+
+    /* -------------------
+       Footer 样式 (独立区块)
+       ------------------- */
+    .wiki-footer {
+        background-color: #fff !important;
+        border-radius: 1.5rem !important;
+        padding: 3rem 2rem !important;
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.02) !important;
+        margin-top: auto !important; /* Flex布局神器：自动吸附到底部 */
+        border-top: none !important;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 1080px) {
+        body .book-page { padding: 10px !important; }
+        .markdown { 
+            padding: 20px !important; 
+            border-radius: 1rem !important;
+        }
+        .wiki-footer {
+            border-radius: 1rem !important;
+            padding: 2rem 1rem !important;
+        }
+    }
+
+    /* -------------------
+       排版细节保持
+       ------------------- */
+    .markdown h1 {
+        color: #2c2c2c !important;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+    .markdown h1::after {
+        content: ""; display: block; width: 60px; height: 4px;
+        background: #f4623a; margin-top: 15px; border-radius: 2px;
+    }
+    .markdown p { line-height: 1.8; margin-bottom: 1.5rem; }
+    .markdown a {
+        color: #f4623a !important; font-weight: 600;
+        border-bottom: 1px solid rgba(244,98,58,0.3);
+    }
+    .markdown blockquote {
+        background-color: #fdfbf7; border-left: 4px solid #f4623a;
+        color: #6c757d; padding: 1.5rem; border-radius: 0.5rem;
+    }
+    .markdown table {
+        border-radius: 0.8rem; overflow: hidden; border: 1px solid #eee;
+    }
+    .markdown table thead tr { background-color: #f4623a; color: #fff; }
+    .markdown table th, .markdown table td { padding: 12px 15px; }
+</style>
