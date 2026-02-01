@@ -3,7 +3,7 @@
 
 <style>
     /* =========================================
-       PettingGo 4.0 结构分离版 (修复 Footer 位置)
+       PettingGo 5.0 终极优化版 (修复视觉痛点)
        ========================================= */
     
     :root {
@@ -20,7 +20,7 @@
     }
 
     /* 标题字体 */
-    h1, h2, h3, h4, h5, h6, .book-brand {
+    h1, h2, h3, h4, h5, h6, .book-brand, .book-menu {
         font-family: system-ui, -apple-system, sans-serif !important;
     }
 
@@ -39,16 +39,18 @@
         margin-bottom: 2rem;
         text-align: center;
     }
+    /* 菜单链接 */
     body .book-menu a {
         color: #6c757d !important;
         font-size: 0.9rem;
         padding: 6px 0;
-        font-family: system-ui, sans-serif !important;
+        transition: all 0.2s;
     }
     body .book-menu a:hover, body .book-menu a.active {
         color: #f4623a !important;
         background: transparent !important;
         transform: translateX(5px);
+        font-weight: 600;
     }
     /* 搜索框 */
     body .book-search input {
@@ -64,61 +66,102 @@
     }
 
     /* -------------------
-       右侧大容器 (透明化)
+       右侧大容器
        ------------------- */
     body .book-page {
-        background-color: transparent !important; /* 关键：大容器透明 */
+        background-color: transparent !important;
         margin: 0 !important;
         padding: 20px !important;
         box-shadow: none !important;
         display: flex;
         flex-direction: column;
-        min-height: 100vh; /* 保证占满全屏高度 */
+        min-height: 100vh;
     }
 
     /* -------------------
-       文章内容卡片 (独立白卡)
+       文章内容卡片
        ------------------- */
     .markdown {
         background-color: #fff !important;
         padding: 40px !important;
         border-radius: 1.5rem !important;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
-        margin-bottom: 2rem !important; /* 把 Footer 顶开 */
-        
-        /* 关键：把内容撑开，让 Footer 沉底 */
+        margin-bottom: 2rem !important;
         flex-grow: 1; 
         min-height: 60vh; 
     }
 
     /* -------------------
-       Footer 样式 (独立区块)
+       Footer 样式
        ------------------- */
     .wiki-footer {
         background-color: #fff !important;
         border-radius: 1.5rem !important;
         padding: 3rem 2rem !important;
         box-shadow: 0 -5px 20px rgba(0,0,0,0.02) !important;
-        margin-top: auto !important; /* Flex布局神器：自动吸附到底部 */
+        margin-top: auto !important;
         border-top: none !important;
+    }
+
+    /* -------------------
+       【优化】面包屑导航微调
+       ------------------- */
+    .my-breadcrumbs {
+        font-family: system-ui, sans-serif;
+        font-size: 0.85rem;
+        color: #999;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    /* 当前页颜色改深灰，不抢眼 */
+    .my-breadcrumbs .current {
+        color: #6c757d; 
+        font-weight: normal;
+        margin-left: 5px;
+    }
+    .my-breadcrumbs a { color: #999; text-decoration: none; }
+    .my-breadcrumbs a:hover { color: #f4623a; text-decoration: underline; }
+
+    /* -------------------
+       【优化】右侧目录 (TOC) 美化
+       ------------------- */
+    .book-toc {
+        font-size: 0.85rem;
+        margin-top: 1rem;
+    }
+    .book-toc-content {
+        background: #fff;
+        padding: 15px 20px;
+        border-radius: 12px;
+        border-left: 3px solid #f4623a; /* 左侧橙色线条装饰 */
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .book-toc nav ul { padding-left: 0; list-style: none; margin: 0; }
+    .book-toc nav ul li { margin-bottom: 8px; }
+    .book-toc nav ul li a {
+        color: #666;
+        text-decoration: none;
+        display: block;
+        transition: color 0.2s;
+    }
+    .book-toc nav ul li a:hover {
+        color: #f4623a;
+        transform: translateX(2px);
     }
 
     /* 移动端适配 */
     @media (max-width: 1080px) {
         body .book-page { padding: 10px !important; }
-        .markdown { 
-            padding: 20px !important; 
-            border-radius: 1rem !important;
-        }
-        .wiki-footer {
-            border-radius: 1rem !important;
-            padding: 2rem 1rem !important;
-        }
+        .markdown { padding: 20px !important; border-radius: 1rem !important; }
+        .wiki-footer { border-radius: 1rem !important; padding: 2rem 1rem !important; }
+        .book-toc { display: none; } /* 手机端通常隐藏侧边目录 */
     }
 
-    /* -------------------
-       排版细节保持
-       ------------------- */
+    /* 排版细节 */
     .markdown h1 {
         color: #2c2c2c !important;
         font-weight: 800;
@@ -129,7 +172,6 @@
         content: ""; display: block; width: 60px; height: 4px;
         background: #f4623a; margin-top: 15px; border-radius: 2px;
     }
-    .markdown p { line-height: 1.8; margin-bottom: 1.5rem; }
     .markdown a {
         color: #f4623a !important; font-weight: 600;
         border-bottom: 1px solid rgba(244,98,58,0.3);
